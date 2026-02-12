@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: white;
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        overflow-y: auto;
+	overflow-x: hidden;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: #ff4d88;
+        margin-bottom: 15px;
+    }
+
+    #message {
+        font-size: 1.2rem;
+        color: #888;
+        height: 30px;
+        margin-bottom: 15px;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 20px;
+    }
+
+    button {
+        padding: 12px 25px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+        background: linear-gradient(45deg, pink, purple);
+        color: white;
+    }
+
+    #noBtn {
+        background: grey;
+        color: white;
+    }
+
+    .specialBtn {
+        background: linear-gradient(45deg, #ff4d88, #ff99cc);
+        color: white;
+        margin-top: 20px;
+    }
+
+    /* Floating Hearts */
+    .heart {
+        position: absolute;
+        color: pink;
+        font-size: 20px;
+        animation: float 6s linear infinite;
+        opacity: 0.6;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(100vh); opacity: 0; }
+        50% { opacity: 1; }
+        100% { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    /* Confetti */
+    .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        opacity: 0.8;
+        animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(-10vh) rotate(0deg); }
+        100% { transform: translateY(100vh) rotate(720deg); }
+    }
+
+   .letterPage {
+    padding: 40px 20px;
+    max-width: 700px;
+    line-height: 1.8;
+    font-size: 18px;
+    color: #444;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<h1>Will you be my Valentine? 💘</h1>
+<div id="message"></div>
+
+<div class="buttons">
+    <button id="yesBtn">Yes! 💖</button>
+    <button id="noBtn">No 😢</button>
+</div>
+
+<script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const message = document.getElementById("message");
+
+    let yesSize = 1;
+    let clickCount = 0;
+
+    const playfulMessages = [
+        "Are you sure? 🥺",
+        "Think again... 💔",
+        "I’ll buy you chocolates! 🍫",
+        "Pretty please? 🥰",
+        "Don’t break my heart 😭",
+        "Last chance! 💕"
+    ];
+
+    noBtn.addEventListener("click", () => {
+        yesSize *= 1.2;
+        yesBtn.style.transform = `scale(${yesSize})`;
+        message.textContent = playfulMessages[clickCount % playfulMessages.length];
+        clickCount++;
+    });
+
+    yesBtn.addEventListener("click", () => {
+        document.body.innerHTML = `
+            <h1 style="color:#ff1493;">Yayyy!! 💖💖</h1>
+            <h2 style="color:#ff69b4;">You made my day! 🥰</h2>
+            <button class="specialBtn" onclick="openLetter()">Click Me 💌</button>
+        `;
+        startConfetti();
+    });
+
+ function openLetter() {
+
+document.body.innerHTML = `
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap');
+
+body{
+    margin:0;
+    height:100vh;
+    background: linear-gradient(135deg,#ffe6f0,#fff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-family:'Poppins',sans-serif;
+    overflow:hidden;
+}
+
+/* HEART */
+.heart-wrapper{
+    position:relative;
+    width:220px;
+    height:200px;
+    cursor:pointer;
+    transition:transform 0.6s ease;
+}
+
+.heart{
+    position:absolute;
+    width:110px;
+    height:170px;
+    background:#ff4d88;
+    border-radius:110px 110px 0 0;
+    transform:rotate(-45deg);
+    top:0;
+    left:55px;
+    transition:all 0.8s ease;
+}
+
+.heart:after{
+    content:"";
+    position:absolute;
+    width:110px;
+    height:170px;
+    background:#ff4d88;
+    border-radius:110px 110px 0 0;
+    transform:rotate(90deg);
+    top:55px;
+    left:55px;
+}
+
+/* CRACK EFFECT */
+.crack-left, .crack-right{
+    position:absolute;
+    width:50%;
+    height:100%;
+    background:#ff4d88;
+    transition:transform 1s ease;
+}
+
+.crack-left{
+    left:0;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.crack-right{
+    right:0;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+/* LETTER */
+.letter{
+    position:absolute;
+    width:90%;
+    max-width:700px;
+    height:90vh;
+    background:white;
+    padding:30px;
+    box-sizing:border-box;
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.15);
+    text-align:center;
+    line-height:1.8;
+    overflow-y:auto;
+    transform:scale(0);
+    transition:transform 1s ease;
+}
+
+.show-letter{
+    transform:scale(1);
+}
+
+.cursive{
+    font-family:'Great Vibes',cursive;
+    font-size:42px;
+    color:#ff1493;
+}
+
+.content{
+    margin-top:20px;
+    font-size:16px;
+    color:#444;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+    .cursive{
+        font-size:36px;
+    }
+    .content{
+        font-size:15px;
+    }
+}
+
+</style>
+
+<audio id="bgMusic" src="love.mp3" loop></audio>
+
+<div class="heart-wrapper" onclick="crackHeart()">
+    <div class="heart"></div>
+</div>
+
+<div class="letter" id="letterBox">
+    <div class="cursive">For My Nithyashree 💖</div>
+
+    <div class="content">
+    En varameyyyy 💎 <br><br>
+
+    Enna solradhu, ethu solradhu nu therla.  
+    Unaku nerla ethum kuduka vida matra, adhan unakaga oru chinna gift.  
+    <br><br>
+
+    Enaku theriyum unaku enna pudikum nu…  
+    But naa unna force panna poradhu illa. Take your time.  
+    Un guru eppoum un kuda irupan.  
+    <br><br>
+
+    Enakum indha ulagatthulayee romba pudicha ponnu naa… adhu nee dha 🫣  
+    <br><br>
+
+    Kandipa I promise you… unaku the best version of love ahh.  
+    Naa un life la ethumey control panna mata.  
+    Ippo epdi irukomo apdi dha after commit aanaprom um irupan.  
+    Already namba sollikama love panrom… I know 😁  
+    <br><br>
+
+    Seri pothum blade podura 😌  
+    <br><br><br>
+
+    <strong>AS ALWAYS ❤️ <br> LOVE YOU DII CHELLAMEYYY 💕</strong>
+    </div>
+</div>
+
+`;
+}
+
+
+
+
+    // Floating hearts
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 400);
+
+    function startConfetti() {
+        const colors = ["#ff4d88", "#ffcc00", "#66ffcc", "#3399ff", "#ff66ff"];
+        for (let i = 0; i < 150; i++) {
+            const confetti = document.createElement("div");
+            confetti.classList.add("confetti");
+            confetti.style.left = Math.random() * 100 + "vw";
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.width = confetti.style.height = Math.random() * 8 + 5 + "px";
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 3000);
+        }
+    }
+    function openEnvelope() {
+    const envelope = document.querySelector(".envelope");
+    envelope.classList.add("open");
+
+    const music = document.getElementById("bgMusic");
+    music.play();
+}
+    function openHeart() {
+    const heart = document.querySelector(".heart-envelope");
+    const letter = document.getElementById("letterBox");
+    const music = document.getElementById("bgMusic");
+
+    heart.classList.add("open-envelope");
+
+    setTimeout(() => {
+        letter.classList.add("show-letter");
+        music.play();
+    }, 600);
+}
+function crackHeart(){
+
+    const heartWrapper = document.querySelector(".heart-wrapper");
+    const letter = document.getElementById("letterBox");
+    const music = document.getElementById("bgMusic");
+
+    // Crack animation
+    heartWrapper.style.transform = "scale(1.2) rotate(10deg)";
+    heartWrapper.style.opacity = "0";
+
+    setTimeout(()=>{
+        letter.classList.add("show-letter");
+        document.body.style.overflow = "auto";
+        music.play();
+    },800);
+}
+
+
+</script>
+
+</body>
+</html>
